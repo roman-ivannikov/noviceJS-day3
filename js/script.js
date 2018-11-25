@@ -25,8 +25,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		document.body.appendChild(cart);
 		cart.appendChild(heading);
 		cart.appendChild(field);
-		cart.appendChild(close)
-	};
+		cart.appendChild(close);
+	}
 
 	createCard();
 
@@ -40,24 +40,33 @@ window.addEventListener('DOMContentLoaded', function() {
 			// Создаем копию карточки товара
 			let item = products[i].cloneNode(true),
 				btn  = item.querySelector('button');
-			// Удалем кнопку
-			btn.remove();
+
+			// Меняем надпись и ширину кнопки
+			btn.textContent = 'Убрать из корзины';
+			btn.style.width = '140px';
+			// Назначем кнопке действие при нажатии
+			btn.addEventListener('click', function() {
+				// Отображаем карточку товара в магазине
+				products[i].style.display = 'block';
+				// Удаляем товар из корзины
+				item.remove();
+			});
 			// Добавляем товар в корзину
 			field.appendChild(item);
-			// Удаляем карточку товара
-			products[i].remove()
-		})
-	};
+			// Скрываем карточку товара в магазине
+			products[i].style.display = 'none';
+		});
+	}
 
 	// Функция открытия корзины
 	function openCart() {
-		cart.style.display = 'block'
-	};
+		cart.style.display = 'block';
+	}
 
 	// Функция закрытия корзины
 	function closeCart() {
-		cart.style.display = 'none'
-	};
+		cart.style.display = 'none';
+	}
 
 	open.addEventListener('click', openCart);
 	close.addEventListener('click', closeCart);
